@@ -51,6 +51,28 @@ for (const file of ['README.md', 'docs/ai-roadmap.md', 'site/index.html']) {
 const screenshotFiles = sources.filter(file => /^assets\/screenshots\//.test(file) && !file.endsWith('.md'));
 if (screenshotFiles.length) throw new Error('新增截图需要逐张人工脱敏与公开确认；当前清单约定没有截图。');
 
+const demoUrl = 'https://melodious-nurturing-production-d07f.up.railway.app/demo';
+function verifyPageBoundary(document, file) {
+  if (document.querySelector('form,iframe')) throw new Error(`展示网站不能接收患者输入或嵌入业务系统：${file}`);
+  for (const script of document.querySelectorAll('script[src]')) {
+    if (/^(?:https?:)?\/\//i.test(script.getAttribute('src'))) throw new Error(`展示网站不加载外部脚本：${file}`);
+  }
+  for (const link of document.querySelectorAll('a[href]')) {
+    const href = link.getAttribute('href');
+    if (!/^(?:https?:)?\/\//i.test(href)) continue;
+    const url = new URL(href, 'https://example.invalid/');
+    if (url.protocol !== 'https:' || /^(?:localhost|127\.0\.0\.1|\[::1\])$/i.test(url.hostname)) throw new Error(`外链必须使用公开 HTTPS 地址：${file} -> ${href}`);
+    if (link.target !== '_blank' || !link.relList.contains('noopener') || !link.relList.contains('noreferrer')) throw new Error(`外链缺少安全属性：${file} -> ${href}`);
+    if (url.hostname.endsWith('.up.railway.app') && href !== demoUrl) throw new Error(`Demo 地址与已授权地址不一致：${file}`);
+  }
+}
+const homepage = new JSDOM(await readFile('site/index.html', 'utf8'));
+verifyPageBoundary(homepage.window.document, 'site/index.html');
+for (const selector of ['.hero-actions a[target="_blank"]', '#live-demo a.button']) {
+  if (homepage.window.document.querySelector(selector)?.getAttribute('href') !== demoUrl) throw new Error(`首页缺少正确的 Demo 入口：${selector}`);
+}
+homepage.window.close();
+
 const built = [];
 if (process.argv.includes('--built')) {
   const outputFiles = (await walk('dist')).map(file => file.replace(/^dist\//, ''));
@@ -58,7 +80,7 @@ if (process.argv.includes('--built')) {
   const parsed = new Map();
   for (const file of outputFiles.filter(file => file.endsWith('.html'))) parsed.set(file, new JSDOM(await readFile(path.join('dist', file), 'utf8')));
   for (const [file, dom] of parsed) {
-    if (dom.window.document.querySelector('form')) throw new Error('展示网站不能包含患者输入表单');
+    verifyPageBoundary(dom.window.document, file);
     for (const element of dom.window.document.querySelectorAll('[href],[src]')) {
       const href = element.getAttribute('href') ?? element.getAttribute('src');
       if (!href || href === '#') throw new Error(`无效按钮或链接：${file}`);
@@ -88,4 +110,4 @@ for (const file of sources) {
 await mkdir('work', { recursive: true });
 const report = { sourceFiles: manifest, generatedSiteFiles: built, sensitiveFindings: [], markdownLinksChecked: markdownLinks, screenshotFiles: 0, projectLicenseAdded: false, publicationApproved: false, published: false, reviewLimit: 'Static/DOM/link and pattern checks only; separate browser review is recorded in docs/verification.md; no proof of clinical efficacy.' };
 await writeFile('work/publication-manifest.json', JSON.stringify(report, null, 2));
-console.log(`公开候选检查通过：${sources.length} 个源文件，${markdownLinks} 个 Markdown 内部链接；未发现已识别敏感格式。尚未公开。`);
+console.log(`公开候选检查通过：${sources.length} 个源文件，${markdownLinks} 个 Markdown 内部链接；未发现已识别敏感格式。此结果不代表新版本已发布或公网 Demo 可用性已复验。`);

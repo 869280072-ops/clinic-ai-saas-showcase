@@ -9,3 +9,36 @@
 .hero-description,.section-intro,.feature>p,.flow-line small,.section-note,.evidence-summary p,.evidence-records p,.screens-section>div>p:not(.eyebrow),.roadmap-intro,.roadmap-grid p,.decision-list p,.doc-links small,.contact-placeholder,.english-note p{color:#65735e}
 .feature-index,.eyebrow,.record-label,.author-line small,.proof-strip>div>span,.visual-footnote,.paper-bottom,.journey-list p,.screenshot-placeholder small,.screenshot-placeholder p,.site-footer p{color:#6e7b61}
 .status.done{color:#597044}.architecture-flow p{color:#b1c5a5}.architecture-caption{color:#a7bea3}.feature>p,.evidence-records p,.decision-list p,.roadmap-grid p{font-size:12px}
+
+/* Extend the existing botanical palette with a direct, accessible demo path. */
+.hero-actions{flex-direction:column;align-items:flex-start;gap:12px}
+.demo-primary{font-size:14px;min-height:50px;padding:13px 23px;gap:26px}
+.hero-secondary-actions{display:flex;flex-wrap:wrap;gap:6px 26px}
+.hero-secondary-actions .inline-link{min-height:44px}
+.hero-demo-note{font-size:11px;color:#65735e;margin-top:4px;line-height:1.8}
+.live-demo{background:#edf0e3;border:1px solid #d9e1cb;border-radius:10px;padding:34px 38px;margin-bottom:68px;scroll-margin-top:110px}
+.demo-heading{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:23px}
+.demo-badge{font-size:10px;letter-spacing:.6px;color:#506747;border:1px solid #c8d3b8;border-radius:20px;padding:5px 12px;white-space:nowrap}
+.demo-layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:45px;align-items:start}
+.demo-copy h2{font-family:var(--serif);font-size:32px;line-height:1.5;letter-spacing:.5px}
+.demo-copy>p{font-size:13px;color:#586b50;line-height:2;margin-top:17px;max-width:590px}
+.demo-features{display:grid;grid-template-columns:1fr 1fr;gap:13px 17px;list-style:none;padding:0;margin:24px 0 16px;font-size:12px;color:#36543d}
+.demo-features li{display:flex;gap:9px;align-items:baseline}
+.demo-features li::before{content:"✓";color:#547344;flex-shrink:0}
+.demo-copy>.inline-link{min-height:44px}
+.demo-guide{background:var(--green);color:var(--paper);padding:25px 26px;border-radius:7px}
+.demo-guide .eyebrow{color:#bccdae;font-size:9px}
+.demo-guide h3{font-family:var(--serif);font-size:20px;line-height:1.6;margin-top:12px}
+.demo-guide ol{padding-left:20px;margin:20px 0 24px;color:#e0e9d7;font-size:12px;line-height:1.9}
+.demo-guide li{padding-left:5px;margin-bottom:9px}
+.demo-guide .button{width:100%;justify-content:space-between;min-height:48px;background:#f1f3e6;color:#214d3c;font-size:13px;gap:12px}
+.demo-guide .button:hover{background:#fffefa}
+.demo-guide .demo-guide-note{font-size:10px;color:#c5d4b8;margin-top:12px;line-height:1.8}
+.demo-boundaries{border-top:1px solid #d3ddc4;padding-top:22px;margin-top:27px}
+.demo-boundaries h3{font-size:13px;color:#405c3e}
+.demo-boundaries ul{display:grid;grid-template-columns:1fr 1fr;gap:8px 30px;margin:11px 0 0;padding-left:17px;font-size:11px;color:#53664c;line-height:1.9}
+.demo-boundaries>p{font-size:11px;color:#53664c;line-height:1.9;margin-top:12px}
+.evidence-number.evidence-live{font-size:62px;letter-spacing:3px}
+@media(max-width:1000px){.desktop-nav{gap:14px}.live-demo{padding:28px}.demo-layout{gap:25px;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}.demo-copy h2{font-size:28px}.demo-features{grid-template-columns:1fr;gap:8px}.demo-guide{padding:23px 20px}}
+@media(max-width:760px){.live-demo{padding:25px 22px;margin-bottom:45px;scroll-margin-top:90px}.demo-layout{grid-template-columns:1fr;gap:23px}.demo-heading{align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:20px}.demo-copy h2{font-size:27px}.demo-copy>p{font-size:13px}.demo-features{grid-template-columns:1fr 1fr;gap:11px 15px;font-size:12px}.demo-guide{padding:25px}.demo-boundaries ul{grid-template-columns:1fr;gap:8px}.evidence-number.evidence-live{font-size:52px}.hero-actions{gap:8px}.hero-demo-note{font-size:10px}}
+@media(max-width:390px){.demo-primary{font-size:13px;gap:20px;padding:13px 18px}.demo-features{grid-template-columns:1fr}.demo-copy h2{font-size:25px}.demo-guide{padding:23px 19px}.hero-secondary-actions{gap:4px 18px}}

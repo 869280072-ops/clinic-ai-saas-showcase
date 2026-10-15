@@ -74,7 +74,8 @@ for (const [source, output, label] of documents) {
         if (outputBySource.has(target)) href = path.posix.relative(path.posix.dirname(output), outputBySource.get(target)) + (fragment ? `#${fragment}` : '');
       }
       if (/^(?:javascript|data):/i.test(href)) throw new Error('不允许不安全链接');
-      return `<a href="${escapeHtml(href)}">${this.parser.parseInline(token.tokens)}</a>`;
+      const external = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noopener noreferrer"' : '';
+      return `<a href="${escapeHtml(href)}"${external}>${this.parser.parseInline(token.tokens)}</a>`;
     },
     code(token) {
       if (token.lang === 'mermaid') {

@@ -8,7 +8,7 @@
 
 **这是求职作品集，展示产品设计、技术交付与验证过程；不是已商业部署的诊疗系统。** 本仓库只包含公开展示材料和静态展示网站，业务源码留在独立私有开发仓库。阅读本仓库不需要访问任何私有仓库。
 
-[公开展示仓库](https://github.com/869280072-ops/clinic-ai-saas-showcase) · [产品功能与验收](docs/product-features.md) · [求职项目介绍](docs/recruitment-summary.md)
+[立即体验在线 Demo ↗](https://melodious-nurturing-production-d07f.up.railway.app/demo) · [作品集网站](https://869280072-ops.github.io/clinic-ai-saas-showcase/) · [产品功能与验收](docs/product-features.md) · [求职项目介绍](docs/recruitment-summary.md)
 
 ## 30 秒了解项目
 
@@ -17,12 +17,20 @@
 | 服务对象 | 基层中医诊所的接诊医生与诊所工作人员 |
 | 核心问题 | 患者资料、历史病历、复诊变化和随访任务分散，连续查看与追踪不便 |
 | 已实现 | 中文工作台、患者建档与查询、初诊、历史查看、复诊、随访与状态管理、SQLite 持久化 |
-| 已验证 | 第一版核心业务已人工操作验收；11 项自动回归测试通过；开发项目 GitHub CI 已核对成功 |
-| 待复核 | MVP v0.1 最新质量修复尚需完成 Codespaces 全部人工回归 |
+| 已验证 | 作者已完成人工公网验收：建档、初诊、历史、复诊、随访结果与状态、刷新保留、普通与无痕窗口的基础双向隔离；既有公开摘要另记录 11 项自动回归与成功 CI |
+| 待复核 | 约 4 小时到期清理、服务重启后的公网持久化、长期稳定性、完整安全审计及真实诊所效果；质量修复专项人工回归仍需补全 |
 | AI 状态 | **未接入模型**；现有页面只有规划入口，不生成 AI 分析或诊疗建议 |
-| 项目形态 | 单诊所演示空间；尚无登录权限、多租户隔离或真实商业部署 |
+| 项目形态 | GitHub Pages 静态作品集 + Railway 独立交互 Demo；访客独立演示空间不等同于完整多租户权限体系 |
 
-**English overview.** Bencao Cloud is a Chinese-language clinic management MVP designed around patient registration, initial visits, return visits and follow-up tracking. The author brings a Traditional Chinese Medicine background and primary-care clinical experience, defines the product requirements, and uses Codex for assisted implementation. Core workflows and persistence have been manually verified; the latest quality fixes have automated coverage and still require full browser regression. AI-assisted review is a roadmap item, not an implemented capability. This repository contains portfolio materials and a static presentation site, not the private application source code.
+## 在线体验：从一份虚构档案开始
+
+[进入 Railway SaaS Demo](https://melodious-nurturing-production-d07f.up.railway.app/demo)，无需安装软件或登录 GitHub。建议依次体验：**阅读演示规则 → 新建虚构患者 → 保存初诊 → 查询历史并创建复诊 → 创建随访并更新结果与状态 → 刷新确认当前会话保留**。
+
+仅允许虚构资料，**不得输入真实患者信息**。每位访客使用独立演示空间，规则有效期约 4 小时；到期自动清理仍待完整验收。当前没有接入 AI 医疗辅助模型，不代表正式商用或医疗生产系统，不用于真实诊疗。
+
+公网人工验收范围、证据来源及尚未验证的事项见 [验证记录](docs/verification.md)。
+
+**English overview.** Bencao Cloud is a Chinese-language clinic management MVP shaped by the author's Traditional Chinese Medicine background and primary-care experience, with Codex-assisted implementation. A separate Railway demo lets visitors try fictional patient registration, visits and follow-up without a GitHub login. The author has manually verified the public workflow, refresh retention and basic isolation between regular and incognito windows. Expiry cleanup, public restart persistence, long-term reliability and a full security audit remain unverified. AI assistance is not implemented. This repository contains portfolio materials and a GitHub Pages site, not application source code or patient data.
 
 ## 业务背景：把一次接诊放回连续照护中
 
@@ -38,7 +46,7 @@
 
 ## 我的角色与主要职责
 
-作者负责临床场景拆解、MVP 范围取舍、业务流程与验收标准设计、Codex 开发任务组织、问题复现、测试检查及交付迭代。代码实现由作者使用 Codex 辅助完成，作者承担需求判断、结果检查和人工业务验收。
+作者负责临床场景拆解、MVP 范围取舍、业务流程与验收标准设计、Codex 开发任务组织、问题复现、测试检查、云端演示部署及交付迭代。代码实现由作者使用 Codex 辅助完成，作者承担需求判断、结果检查和人工业务验收。
 
 这个作品体现的是 **临床问题 → 产品需求 → 技术实现 → 验证反馈** 的转译过程，不把工具生成代码等同于已完成临床或商业验证。
 
@@ -49,11 +57,12 @@
 | 功能 | 已有实现 | 验证边界 |
 | --- | --- | --- |
 | 中文管理工作台 | 患者、就诊、复诊与待随访概览 | 已实现；不代表经营分析平台 |
-| 患者档案 | 新建、编辑、查询与详情 | 第一版人工验收通过 |
-| 初诊记录 | 指定患者填写并保存初诊 | 第一版人工验收通过 |
-| 历史与复诊 | 查看既往记录，创建复诊并记录变化 | 第一版人工验收通过 |
-| 随访管理 | 创建任务，更新状态和结果 | 第一版人工验收通过 |
-| 数据持久化 | SQLite 读写，刷新及重启后保留 | 人工刷新验收及自动重启检查通过 |
+| 患者档案 | 新建、编辑、查询与详情 | 公网建档与查询已人工验收；不扩大为全部编辑路径验收 |
+| 初诊记录 | 指定患者填写并保存初诊 | 公网保存与历史查询已人工验收 |
+| 历史与复诊 | 查看既往记录，创建复诊并记录变化 | 公网保存与关联已人工验收 |
+| 随访管理 | 创建任务，更新状态和结果 | 公网创建、结果保存与状态更新已人工验收 |
+| 数据持久化 | SQLite 读写 | 公网刷新保留已验收；既有自动重启检查不替代公网重启验收 |
+| 访客演示空间 | 独立空间，约 4 小时有效期规则 | 普通与无痕窗口基础双向隔离已人工验收；到期清理待验证 |
 | MVP v0.1 质量修复 | 提交锁、重复编号 409、详情跳转、日期与并发保护 | 自动回归通过；完整人工复核待完成 |
 | AI 辅助复诊 | 仅保留规划入口 | **未实现模型调用及 AI 分析** |
 
@@ -90,16 +99,16 @@ flowchart LR
 - Web 层提供中文页面和表单，Next.js 提供页面与 API 路由。
 - 业务服务负责校验、就诊顺序、患者关联与持久化操作。
 - Prisma 通过 SQLite 适配器访问数据库；版本化 SQL 迁移维护结构与写入约束。
-- 现阶段没有 AI 模型、向量数据库、消息队列或特定公有云服务依赖。
+- 现阶段没有 AI 模型、向量数据库或消息队列；交互 Demo 托管于 Railway，静态作品集托管于 GitHub Pages。
 
 本公开网站另外使用轻量静态 HTML/CSS 与文档构建脚本，不运行上述业务系统。详见 [产品与技术架构](docs/architecture.md)。
 
 ## 关键交付与验证成果
 
 1. 将患者建档到随访状态更新串成真实读写的业务闭环。
-2. 第一版核心操作及刷新持久化已由作者在浏览器人工验收。
-3. 11 项回归测试覆盖业务、重复提交、并发、旧数据保留及日期等场景；开发项目 CI 已核对成功。
-4. 为最新质量修复保留人工验收待办，没有用自动测试替代浏览器验收。
+2. 作者已在 Railway 公网环境人工验收核心操作、随访结果与状态保存及刷新保留。
+3. 既有公开摘要记录 11 项回归覆盖业务、重复提交、并发、旧数据保留及日期等场景，开发 CI 已成功；本轮不读取私有项目或重新核定其测试数量。
+4. 普通与无痕窗口的基础双向隔离通过人工操作检查；到期清理、公网重启持久化及专项质量回归仍保留待办。
 5. 将私有开发与公开展示分离；本仓库不含患者数据库、业务源码、环境凭据或内部日志。
 
 没有统计真实用户规模、临床效果、商业收入或效率提升百分比。以上是交付与验证证据，不是医疗有效性证明。
@@ -118,10 +127,10 @@ flowchart LR
 ## 现阶段局限
 
 - 最新质量修复尚待完整人工回归；没有长期多用户压测和多诊所试点数据。
-- 登录、角色权限、多租户、审计日志、收费、处方、药房与生产运维尚未完成。
-- 当前是单诊所演示空间，未作为真实医疗系统上线。
+- 登录、角色权限、完整多租户体系、审计日志、收费、处方、药房与生产运维尚未完成；基础访客隔离不代表安全合规认证。
+- 已上线独立公众 Demo，但未作为真实医疗系统或商业系统上线。到期清理、公网服务重启后的持久化及长期稳定性仍待验收。
 - 依赖维护仍有后续工作：最近开发审计保留 5 项 high，来自开发工具链；生产依赖审计快照为 0。这是一次检查结果，不是永久安全保证。
-- 公开仓库提供资料和静态网站，不能在这里操作患者或查看私有开发项目的原始 CI 日志。
+- GitHub Pages 只展示资料，交互操作发生在外部 Railway Demo；公开仓库不含 SaaS 业务代码、患者数据或私有原始日志。
 
 ## AI 能力规划：先可核对，再可采用
 
@@ -146,7 +155,8 @@ flowchart LR
 
 ## 展示网站与联系方式
 
-静态网站源文件位于 `site/`，可构建为 GitHub Pages 站点；目前未公开部署，因此不提供虚构在线 Demo 地址。它展示项目资料，不是诊所 SaaS 登录入口。
+- [GitHub Pages 作品集](https://869280072-ops.github.io/clinic-ai-saas-showcase/)：由 `site/` 与公开文档构建，只展示产品、设计与证据。
+- [Railway 交互 Demo](https://melodious-nurturing-production-d07f.up.railway.app/demo)：独立运行的 SaaS MVP，使用虚构资料体验业务；不是 GitHub Pages 内的应用，也没有复制到本仓库。
 
 **联系方式：待作者补充。** 姓名、邮箱与 LinkedIn 主页均未提供，不设置无效联系按钮。
 
