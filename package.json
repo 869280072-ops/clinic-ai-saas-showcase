@@ -1,0 +1,19 @@
+{
+  "name": "clinic-ai-saas-showcase",
+  "version": "0.1.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "description": "Bencao Cloud portfolio materials and a static presentation site; no clinic application source or patient data.",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "check": "node scripts/verify.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/verify.mjs --built"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "jsdom": "27.4.0",
+    "marked": "18.1.1",
+    "mermaid": "12.2.0"
+  }
+}
