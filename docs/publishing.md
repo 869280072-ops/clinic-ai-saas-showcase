@@ -2,6 +2,15 @@
 
 这是一套独立的公开作品集资料。网站用于说明产品，不提供患者管理、模型调用或医疗服务。没有复制业务源码、数据、内部环境配置或私有 Git 历史。
 
+## 两个公开入口，各自独立
+
+| 入口 | 用途与边界 |
+| --- | --- |
+| [GitHub Pages 作品集](https://869280072-ops.github.io/clinic-ai-saas-showcase/) | 已发布的静态产品、设计和验证资料；不运行业务后端或接收患者数据 |
+| [Railway SaaS Demo](https://melodious-nurturing-production-d07f.up.railway.app/demo) | 独立运行的交互 MVP，仅通过外链打开；无需 GitHub 登录，不复制源码或嵌入本站 |
+
+Demo 只允许虚构资料，禁止真实患者信息；独立访客空间规则有效期约 4 小时，没有 AI 医疗辅助模型，不代表正式商用或医疗生产系统。公网人工验收及未验证项见 [验证记录](verification.md)。
+
 ## 仓库结构
 
 ```text
@@ -30,13 +39,13 @@ npm test
 
 构建将静态首页与文档阅读页输出到 `dist/`。首页使用本地资源，没有外部字体或分析追踪；仅含图表的文档阅读页加载本地打包的 Mermaid。第三方工具的许可声明随构建产物保留，不代表为整个作品集指定开源许可证。
 
-如需在自己的电脑预览，可运行 `python3 -m http.server 8080 --directory dist`，再打开本机对应地址；云端应使用所在平台提供的端口转发入口。本仓库尚未部署，不把本机 localhost 写成在线 Demo。
+如需在自己的电脑预览，可运行 `python3 -m http.server 8080 --directory dist`，再打开本机对应地址；云端应使用所在平台提供的端口转发入口。本机预览地址不是在线 Demo；已发布的两个 HTTPS 入口见上表。
 
 ## 当前发布边界
 
-公开展示仓库已由作者创建：[869280072-ops/clinic-ai-saas-showcase](https://github.com/869280072-ops/clinic-ai-saas-showcase)。本轮复用上一轮已检查的 23 个源文件，按作者授权补充说明与 PR 构建检查；通过 `codex/portfolio-showcase` 分支提交审核，不直接更新或合并到 main。
+公开展示仓库：[869280072-ops/clinic-ai-saas-showcase](https://github.com/869280072-ops/clinic-ai-saas-showcase)。本次从 main 创建 `feat/live-demo-showcase`，复用既有页面与文档，仅补充获准公开的在线演示入口、验收事实及必要检查；提交 PR 审核，不直接更新或合并 main。
 
-业务开发仓库始终保持 Private，不复制其源码、配置、数据库或 Git 历史。只向展示仓库提交明确列入清单的文件，不上传 `node_modules/`、`dist/`、`work/`、压缩包、凭据或系统运行日志。不操作无关仓库。
+业务开发仓库始终保持 Private，本次不读取或修改它，不复制源码、配置、数据库或 Git 历史。只向展示仓库提交必要源文件，不上传 `node_modules/`、`dist/`、`work/`、压缩包、凭据、患者资料或系统运行日志，不修改 Railway 服务。
 
 ## 提交审核
 
@@ -50,9 +59,10 @@ npm test
 2. 在展示仓库 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**。
 3. 查看 **Actions → Showcase Pages**：PR 只做检查与构建，不上传 Pages 产物、不执行部署；main 推送或 main 上手动触发才允许部署。
 4. 若 main 首次运行发生在 Pages 启用之前，启用后在 main 上使用 **Run workflow** 重新执行。需要 Pages 配置或环境审批时，由仓库管理员按 GitHub 提示处理。
-5. 确认 build 与 deploy 均成功，再从 Pages 设置或成功部署记录取得真实 HTTPS 地址并打开验证；随后才加入 README、简历或 LinkedIn。
+5. 确认 build 与 deploy 均成功，在已发布的 Pages 地址硬刷新，检查首屏 Demo 主按钮、功能区后的体验卡片、手机导航与文档链接。
+6. 点击 Demo 链接应在新标签页打开上表的 Railway HTTPS 地址，无需 GitHub 登录。若无法访问，记录当时情况，不能把静态构建通过写成 Demo 可用性证明。
 
-当前未正式部署，没有经过验证的公开网站或业务 Demo 地址。Pages 站点仅展示作品资料，不承载 Next.js、患者数据库或诊疗操作。
+两个入口均已有实际地址；本次 PR 尚未合并发布，不能将本地新页面当作线上已更新。保留 `.github/workflows/pages.yml`：PR 只检查与构建，main 合并后由现有流程更新静态站点，不触发 Railway 部署。
 
 ## License 与后续截图
 
